@@ -7,7 +7,7 @@ addEventListener('fetch', function(event) {
 async function handleRequest(request) {
     const doh = 'https://security.cloudflare-dns.com/dns-query'
     const { method, url } = request
-    const { host, pathname, searchParams } = new URL(url)
+    const { host, searchParams } = new URL(url)
     if (method == 'GET' && searchParams.has('dns')) {
         return await fetch(doh + '?dns=' + searchParams.get('dns'), {
             method: 'GET',
