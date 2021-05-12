@@ -5,6 +5,6 @@ Sign up for a free [Cloudlare Workers](https://workers.cloudflare.com/) account,
 
 Why? In case ISPs start banning known DoH providers, you can use your own proxy. Even if they block workers.dev wholesale, you can use your own domain. Daily request on free tier is limited to 100 thousands, should be enough for most personal use, or even a family.
 
-You can also deploy the project using the button below, good if you want to quickly modify the parameter/code without manually deploying to Cloudflare. Keep in mind the Action logs are visible to public so they can see your Cloudflare Worker address.
+You can also deploy the project using the button below, useful if you want to quickly modify the parameter/code without manually deploying to Cloudflare. Keep in mind the Action logs are visible to public unless you make your repository private, so they can see your Cloudflare Worker address.
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tina-hello/doh-cf-workers)
