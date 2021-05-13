@@ -7,7 +7,7 @@ addEventListener('fetch', function(event) {
 async function handleRequest(request) {
     const doh = 'https://security.cloudflare-dns.com/dns-query'
     const contype = 'application/dns-message'
-    const { method, url } = request
+    const { method, headers, url } = request
     const { host, searchParams } = new URL(url)
     if (method == 'GET' && searchParams.has('dns')) {
         return await fetch(doh + '?dns=' + searchParams.get('dns'), {
@@ -16,12 +16,12 @@ async function handleRequest(request) {
                 'Accept': contype,
             }
         });
-    } else if (method == 'POST' && headers.get('Content-Type')=='application/dns-message') {
+    } else if (method == 'POST' && headers.get('content-type')=='application/dns-message') {
         return await fetch(doh, {
             method: 'POST',
             headers: {
-                'Accept': 'application/dns-message',
-                'Content-Type': 'application/dns-message',
+                'Accept': contype,
+                'Content-Type': contype,
             },
             body: await request.arrayBuffer()
         });
