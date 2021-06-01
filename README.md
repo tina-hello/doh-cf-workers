@@ -8,3 +8,7 @@ Why? In case ISPs start banning known DoH providers, you can use your own proxy.
 You can also deploy the project using the button below, useful if you want to quickly modify the parameter/code without manually deploying to Cloudflare. Keep in mind the Action logs are visible to public unless you make your repository private, so they can see your Cloudflare Worker address.
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tina-hello/doh-cf-workers)
+
+Want more control of the filter? Use [serverless-dns](https://github.com/serverless-dns/serverless-dns) which powers [RethinkDNS](https://rethinkdns.com/)
+
+Want to host on Google Cloud Function or see how this is implemented in .NET? Use my [doh-gcf](https://github.com/tina-hello/doh-gcf)
