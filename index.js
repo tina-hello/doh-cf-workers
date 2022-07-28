@@ -16,7 +16,7 @@ async function handleRequest(request) {
                 'Accept': contype,
             }
         });
-    } else if (method == 'POST' && headers.get('content-type')=='application/dns-message') {
+    } else if (method == 'POST' && headers.get('content-type')==contype) {
         return await fetch(doh, {
             method: 'POST',
             headers: {
