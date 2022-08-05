@@ -4,11 +4,15 @@ addEventListener('fetch', function(event) {
     event.respondWith(response)
 })
 
+const doh = 'https://security.cloudflare-dns.com/dns-query'
+const dohjson = 'https://security.cloudflare-dns.com/dns-query'
+const contype = 'application/dns-message'
+const jstontype = 'application/dns-json'
+
 async function handleRequest(request) {
-    const doh = 'https://security.cloudflare-dns.com/dns-query'
-    const contype = 'application/dns-message'
+    
     const { method, headers, url } = request
-    const { host, searchParams } = new URL(url)
+    const searchParams = new URL(url).searchParams
     if (method == 'GET' && searchParams.has('dns')) {
         return await fetch(doh + '?dns=' + searchParams.get('dns'), {
             method: 'GET',
@@ -24,6 +28,14 @@ async function handleRequest(request) {
                 'Content-Type': contype,
             },
             body: await request.arrayBuffer()
+        });
+    } else if (method== 'GET' && headers.get('Accept')==jstontype) {
+        const search = new URL(url).search
+         return await fetch(dohjson + search, {
+            method: 'GET',
+            headers: {
+                'Accept': jstontype,
+            }
         });
     } else {
         return new Response("", {status: 404})
