@@ -28,7 +28,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Deploy to Cloudflare Workers with Wrangler
-        uses: cloudflare/wrangler-action@1.2.0
+        uses: cloudflare/wrangler-action@2.0.0
         with: 
           apiToken: ${{ secrets.CF_API_TOKEN }}
         env:
