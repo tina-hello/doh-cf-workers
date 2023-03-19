@@ -2,13 +2,13 @@
   "private": true,
   "name": "doh",
   "version": "1.0.0",
-  "description": "Basic DNS-over-HTTPS proxy on Cloudflare Workers",
+  "description": "DNS-over-HTTPS proxy on Cloudflare Workers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '**/*.{js,css,json,md}'"
   },
-  "author": "tina-hello",
+  "author": "MikMc",
   "license": "CC0-1.0",
   "devDependencies": {
     "prettier": "^1.18.2"
