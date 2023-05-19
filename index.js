@@ -8,9 +8,9 @@ const r404 = new Response(null, {status: 404});
 
 // developers.cloudflare.com/workers/runtime-apis/fetch-event/#syntax-module-worker
 export default {
-  async fetch(r, env, ctx) {
-    return handleRequest(r);
-  },
+    async fetch(r, env, ctx) {
+        return handleRequest(r);
+    },
 };
 
 async function handleRequest(request) {
@@ -27,15 +27,15 @@ async function handleRequest(request) {
             }
         });
     } else if (method === 'POST' && headers.get('content-type') === contype) {
-        // streaming out the request content is optimal than awaiting on it
-        const reqstream = request.arrayBuffer();
+        // TODO: streaming out request buffer is optimal than awaiting on it
+        const reqbuf = await request.arrayBuffer();
         res = fetch(doh, {
             method: 'POST',
             headers: {
                 'Accept': contype,
                 'Content-Type': contype,
             },
-            body: reqstream,
+            body: reqbuf,
         });
     } else if (method === 'GET' && headers.get('Accept') === jstontype) {
         const search = new URL(url).search
