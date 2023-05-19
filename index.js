@@ -27,15 +27,15 @@ async function handleRequest(request) {
             }
         });
     } else if (method === 'POST' && headers.get('content-type') === contype) {
-        // TODO: streaming out request buffer is optimal than awaiting on it
-        const reqbuf = await request.arrayBuffer();
+        // streaming out the request body is optimal than awaiting on it
+        const rostream = request.body;
         res = fetch(doh, {
             method: 'POST',
             headers: {
                 'Accept': contype,
                 'Content-Type': contype,
             },
-            body: reqbuf,
+            body: rostream,
         });
     } else if (method === 'GET' && headers.get('Accept') === jstontype) {
         const search = new URL(url).search
