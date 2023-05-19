@@ -1,4 +1,5 @@
 name = "doh"
 workers_dev = true
-compatibility_date = "2022-10-21"
+compatibility_date = "2023-03-14"
 main = "index.js"
+usage_model = "unbound"
