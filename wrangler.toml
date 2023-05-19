@@ -3,3 +3,4 @@ workers_dev = true
 compatibility_date = "2023-03-14"
 main = "index.js"
 usage_model = "bundled"
+# paid account can use "unbound" instead of "bundled", ideal if you need more than 100k requests per day due to cheaper pricing at scale
