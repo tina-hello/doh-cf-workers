@@ -1,43 +1,50 @@
-addEventListener('fetch', function(event) {
-    const { request } = event
-    const response = handleRequest(request)
-    event.respondWith(response)
-})
+// SPDX-License-Identifier: CC0-1.0
 
 const doh = 'https://security.cloudflare-dns.com/dns-query'
 const dohjson = 'https://security.cloudflare-dns.com/dns-query'
 const contype = 'application/dns-message'
 const jstontype = 'application/dns-json'
+const r404 = new Response(null, {status: 404});
+
+// developers.cloudflare.com/workers/runtime-apis/fetch-event/#syntax-module-worker
+export default {
+  async fetch(r, env, ctx) {
+    return handleRequest(r);
+  },
+};
 
 async function handleRequest(request) {
-    
+    // when res is a Promise<Response>, it reduces billed wall-time
+    // blog.cloudflare.com/workers-optimization-reduces-your-bill
+    let res = r404;
     const { method, headers, url } = request
     const searchParams = new URL(url).searchParams
     if (method == 'GET' && searchParams.has('dns')) {
-        return await fetch(doh + '?dns=' + searchParams.get('dns'), {
+        res = fetch(doh + '?dns=' + searchParams.get('dns'), {
             method: 'GET',
             headers: {
                 'Accept': contype,
             }
         });
-    } else if (method == 'POST' && headers.get('content-type')==contype) {
-        return await fetch(doh, {
+    } else if (method === 'POST' && headers.get('content-type') === contype) {
+        // streaming out the request content is optimal than awaiting on it
+        const reqstream = request.arrayBuffer();
+        res = fetch(doh, {
             method: 'POST',
             headers: {
                 'Accept': contype,
                 'Content-Type': contype,
             },
-            body: await request.arrayBuffer()
+            body: reqstream,
         });
-    } else if (method== 'GET' && headers.get('Accept')==jstontype) {
+    } else if (method === 'GET' && headers.get('Accept') === jstontype) {
         const search = new URL(url).search
-         return await fetch(dohjson + search, {
+         res = fetch(dohjson + search, {
             method: 'GET',
             headers: {
                 'Accept': jstontype,
             }
         });
-    } else {
-        return new Response("", {status: 404})
     }
+    return res;
 }
