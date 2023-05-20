@@ -9,7 +9,7 @@
     "format": "prettier --write '**/*.{js,css,json,md}'"
   },
   "author": "tina-hello",
-  "license": "CC0-1.0",
+  "license": "0BSD",
   "devDependencies": {
     "prettier": "^1.18.2"
   }
