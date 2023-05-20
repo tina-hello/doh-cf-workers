@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: CC0-1.0
+// SPDX-License-Identifier: 0BSD
 
 const doh = 'https://security.cloudflare-dns.com/dns-query'
 const dohjson = 'https://security.cloudflare-dns.com/dns-query'
