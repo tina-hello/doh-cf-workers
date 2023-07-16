@@ -1,4 +1,4 @@
-name = "doh"
+name = "doh-oisd"
 workers_dev = true
 compatibility_date = "2023-03-14"
 main = "index.js"
