@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: 0BSD
+const providers = ["https://dns.dnswarden.com/g",
+				   "https://freedns.controld.com/x-oisd",
+				   "https://sky.rethinkdns.com/1:IAAgAA==",
+				   "https://blitz.ahadns.com/1:1"]
+const doh = providers[Math.random() * providers.length | 0] 
 
-const doh = 'https://security.cloudflare-dns.com/dns-query'
-const dohjson = 'https://security.cloudflare-dns.com/dns-query'
 const contype = 'application/dns-message'
-const jstontype = 'application/dns-json'
+
 const r404 = new Response(null, {status: 404});
 
 // developers.cloudflare.com/workers/runtime-apis/fetch-event/#syntax-module-worker
@@ -36,14 +39,6 @@ async function handleRequest(request) {
                 'Content-Type': contype,
             },
             body: rostream,
-        });
-    } else if (method === 'GET' && headers.get('Accept') === jstontype) {
-        const search = new URL(url).search
-         res = fetch(dohjson + search, {
-            method: 'GET',
-            headers: {
-                'Accept': jstontype,
-            }
         });
     }
     return res;
