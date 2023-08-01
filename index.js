@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: 0BSD
-const providers = ["https://dns.dnswarden.com/g",
+const providers = [
 				   "https://freedns.controld.com/x-oisd",
 				   "https://sky.rethinkdns.com/1:IAAgAA==",
 				   "https://blitz.ahadns.com/1:1"]
