@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: 0BSD
 
-const doh = 'https://security.cloudflare-dns.com/dns-query'
-const dohjson = 'https://security.cloudflare-dns.com/dns-query'
+const doh = 'https://dns.nextdns.io/7b9af8'
+const dohjson = 'https://dns.nextdns.io/7b9af8'
 const contype = 'application/dns-message'
 const jstontype = 'application/dns-json'
 const r404 = new Response(null, {status: 404});
