@@ -24,11 +24,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Dependencies
         run: npm install
       - name: Deploy to Cloudflare Workers with Wrangler
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@v3
         with: 
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: deploy

@@ -10,7 +10,7 @@
   },
   "author": "tina-hello",
   "license": "0BSD",
-  "devDependencies": {
-    "prettier": "^1.18.2"
+  "dependencies": {
+    "wrangler": "^3.24.0"
   }
 }
