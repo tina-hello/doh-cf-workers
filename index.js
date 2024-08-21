@@ -5,18 +5,11 @@ const dohjson = 'https://security.cloudflare-dns.com/dns-query'
 const contype = 'application/dns-message'
 const jstontype = 'application/dns-json'
 const r404 = new Response(null, {status: 404});
-const path = '/dns-query'; // Set to '' to allow all
+const path = ''; // default allow all, must start with / if specified, eg. "/dns-query"
 
 // developers.cloudflare.com/workers/runtime-apis/fetch-event/#syntax-module-worker
 export default {
     async fetch(r, env, ctx) {
-        const RequestPath = new URL(r.url).pathname;
-
-        //Check path
-        if (!RequestPath.startsWith(path)) {
-            return r404;
-        }
-    
         return handleRequest(r);
     },
 };
@@ -27,6 +20,11 @@ async function handleRequest(request) {
     let res = r404;
     const { method, headers, url } = request
     const searchParams = new URL(url).searchParams
+    const RequestPath = new URL(url).pathname;
+    //Check path
+    if (!RequestPath.startsWith(path)) {
+        return r404;
+    }
     if (method == 'GET' && searchParams.has('dns')) {
         res = fetch(doh + '?dns=' + searchParams.get('dns'), {
             method: 'GET',
